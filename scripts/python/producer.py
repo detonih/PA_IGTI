@@ -1,23 +1,23 @@
 import json
-from sseclient import SSEClient as EventSource
 from kafka import KafkaProducer
+from datetime import datetime
+import yfinance as yf
 
 producer = KafkaProducer(
   bootstrap_servers='localhost:9092', #Kafka server
-  value_serializer=lambda v: json.dumps(v).encode('utf-8') #json serializer
+  value_serializer=lambda v: json.dumps(v).encode('utf-8') # Serialize json messages
 )
 
-url = 'https://stream.wikimedia.org/v2/stream/recentchange'
 try:
-    for event in EventSource(url):
-        if event.event == 'message':
-            try:
-                change = json.loads(event.data)
-            except ValueError:
-                pass
-            else:
-                #Send msg to topic wiki-changes
-                producer.send('wiki-changes', change)
-
+    change = yf.Ticker("GOOGL").info
+    print(type(change))
 except KeyboardInterrupt:
     print("process interrupted")
+except ValueError:
+    pass
+else:
+    right_now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    print(f"{right_now} :: Sending messages to Kafka Topic \n {change}")
+    future = producer.send('finance', change)
+    result = future.get(timeout=60)
+

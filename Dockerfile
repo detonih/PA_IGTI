@@ -106,9 +106,9 @@ RUN rm -f /tmp/env.sh
 RUN mkdir -p /scripts/sh
 RUN mkdir /raw-data
 
-COPY config/start-zookeeper.sh config/start-kafka.sh config/create-topic-wiki.sh /tmp/
+COPY config/start-zookeeper.sh config/start-kafka.sh config/create-topic.sh /tmp/
 RUN chmod a+x /tmp/*.sh \
-    && mv /tmp/start-zookeeper.sh /tmp/start-kafka.sh /tmp/create-topic-wiki.sh /usr/bin
+    && mv /tmp/start-zookeeper.sh /tmp/start-kafka.sh /tmp/create-topic.sh /usr/bin
 RUN mkdir /logs
 
 ADD start.sh /start.sh

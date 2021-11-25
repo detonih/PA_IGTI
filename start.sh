@@ -23,6 +23,6 @@ nohup start-zookeeper.sh > /logs/start-zookeeper.log &
 sleep 20
 nohup start-kafka.sh > /logs/start-kafka.log &
 sleep 20
-create-topic-wiki.sh
+create-topic.sh
 
 tail -f /dev/null
