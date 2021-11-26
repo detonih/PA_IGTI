@@ -14,8 +14,8 @@ $HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver
 hdfs dfs -mkdir -p  /user/hive/warehouse
 hdfs dfs -chmod g+w /tmp
 hdfs dfs -chmod g+w /user/hive/warehouse
-hdfs dfs -mkdir /stage
-hdfs dfs -chmod g+w /stage
+hdfs dfs -mkdir /raw-data
+hdfs dfs -chmod g+w /raw-data
 
 $HIVE_HOME/bin/schematool -initSchema -dbType derby
 

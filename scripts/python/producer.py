@@ -17,8 +17,9 @@ try:
         except ValueError:
             pass
         else:
-            right_now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            right_now = datetime.now().strftime("%Y-%m-%d")
             print(f"{right_now} :: Sending messages to Kafka Topic")
+            change["change_date"] = right_now
             future = producer.send('finance', change)
             result = future.get(timeout=60)
 except KeyboardInterrupt:

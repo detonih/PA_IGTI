@@ -68,6 +68,7 @@ RUN pip install kafka-python
 RUN pip install sseclient
 RUN pip install yfinance
 RUN pip install yahoofinancials
+RUN pip install pyspark
 
 ##SPARK
 ENV SPARK_VERSION=3.0.3
@@ -76,7 +77,8 @@ RUN set -x \
     && curl -fSL "$SPARK_URL" -o /tmp/spark.tar.gz \
     && tar -xvf /tmp/spark.tar.gz -C /opt/ \
     && rm /tmp/spark.tar.gz*
-
+RUN wget -O /opt/spark-3.0.3-bin-hadoop2.7/jars/spark-sql-kafka-0-10_2.12-3.1.2.jar https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar
+RUN wget -O /opt/spark-3.0.3-bin-hadoop2.7/jars/kafka-clients-3.0.0.jar https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.0.0/kafka-clients-3.0.0.jar
 ENV SPARK_HOME=/opt/spark-$SPARK_VERSION-bin-hadoop2.7
 ENV PYSPARK_PYTHON=python3.6
 
