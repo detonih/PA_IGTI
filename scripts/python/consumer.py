@@ -28,7 +28,7 @@ df_finance = (df1
            .withColumn("value", F.from_json("value", schema))
            .select(
              "*",
-           F.to_date(F.from_unixtime(F.col("value.timestamp"))).alias("change_date")
+           F.to_date(F.from_unixtime(F.col("value.change_date"))).alias("change_date")
            )
           )
 
