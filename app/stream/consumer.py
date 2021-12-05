@@ -27,17 +27,12 @@ df_finance = (df1
            # Sets schema for event data
            .withColumn("value", F.from_json("value", schema))
            .select(
-              F.col("value.zip").alias("zip"),
               F.col("value.sector").alias("sector"),
               F.col("value.fullTimeEmployees").alias("fullTimeEmployees"),
-              F.col("value.longBusinessSummary").alias("longBusinessSummary"),
               F.col("value.city").alias("city"),
               F.col("value.phone").alias("phone"),
               F.col("value.state").alias("state"),
               F.col("value.country").alias("country"),
-              F.col("value.companyOfficers").alias("companyOfficers"),
-              F.col("value.website").alias("website"),
-              F.col("value.maxAge").alias("maxAge"),
               F.col("value.address1").alias("address1"),
               F.col("value.industry").alias("industry"),
               F.col("value.ebitdaMargins").alias("ebitdaMargins"),
@@ -56,7 +51,6 @@ df_finance = (df1
               F.col("value.earningsGrowth").alias("earningsGrowth"),
               F.col("value.currentRatio").alias("currentRatio"),
               F.col("value.returnOnAssets").alias("returnOnAssets"),
-              F.col("value.numberOfAnalystOpinions").alias("numberOfAnalystOpinions"),
               F.col("value.targetMeanPrice").alias("targetMeanPrice"),
               F.col("value.debtToEquity").alias("debtToEquity"),
               F.col("value.returnOnEquity").alias("returnOnEquity"),
@@ -179,7 +173,6 @@ df_finance = (df1
               F.col("value.dayHigh").alias("dayHigh"),
               F.col("value.regularMarketPrice").alias("regularMarketPrice"),
               F.col("value.preMarketPrice").alias("preMarketPrice"),
-              F.col("value.logo_url").alias("logo_url"),
               F.col("value.change_date").alias("change_date"),
            )
           )

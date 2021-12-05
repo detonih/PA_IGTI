@@ -10,9 +10,11 @@ services:
       - 50070:50070
       - 9000:9000
       - 9092:9092
+      - 8000:8000
     volumes:
       - ./scripts:/scripts
       - ./raw-data:/raw-data
+      - ./app:/app
     env_file:
       - ./.env
     user: root

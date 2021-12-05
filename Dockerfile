@@ -115,6 +115,10 @@ RUN chmod a+x /tmp/*.sh \
     && mv /tmp/start-zookeeper.sh /tmp/start-kafka.sh /tmp/create-topic.sh /usr/bin
 RUN mkdir /logs
 
+RUN pip install fastapi uvicorn[standard]
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
 ADD start.sh /start.sh
 RUN chmod a+x /start.sh
 
