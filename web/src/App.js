@@ -6,11 +6,12 @@ import api from './services/api'
 export default () => {
   const [{ values, loading }, handleChange, handleSubmit] = useForm();
 
-  const getInfo = async () => {
-    console.log(`http://0.0.0.0:8000/info/${values}`);
+  const getInfo = async (e) => {
+    console.log(`http://0.0.0.0:8000/info/${values[Object.keys(values)[0]]}`);
+    
     
     try {
-      const response = await api.get(`http://0.0.0.0:8000/info/${values}`);
+      const response = await api.get(`http://0.0.0.0:8000/info/${values[Object.keys(values)[0]]}`);
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -25,8 +26,8 @@ export default () => {
         <label>
           Choose your company:
           <select onChange={handleChange}>
-            <option value="GOOGL">GOOGL</option>
-            <option value="MSFT">MSFT</option>
+            <option value="GOOGL" name="GOOGL">GOOGL</option>
+            <option value="MSFT" name="MSFT">MSFT</option>
           </select>
         </label>
         {/* <input type="submit" value="Enviar" /> */}
