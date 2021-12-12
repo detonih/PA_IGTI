@@ -18,6 +18,19 @@ services:
     env_file:
       - ./.env
     user: root
-
-
+  
+  web-app: 
+    image: web-frontend:latest
+    container_name: web-frontend
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      - './web:/web'
+      - './web/node_modules'
+    environment:
+      - NODE_ENV=development
 
