@@ -6,17 +6,22 @@ import api from './services/api'
 export default () => {
   const [{ values, loading }, handleChange, handleSubmit] = useForm();
 
-  const getInfo = async (e) => {
-    console.log(`http://0.0.0.0:8000/info/${values[Object.keys(values)[0]]}`);
-    
-    
+  const getInfo = async () => {
     try {
       const response = await api.get(`http://0.0.0.0:8000/info/${values[Object.keys(values)[0]]}`);
       console.log(response);
     } catch (error) {
       console.error(error);
     }
-    
+  };
+
+  const startConsumer = async () => {
+    try {
+      const response = await api.get(`http://0.0.0.0:8000/start_consumer`);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -31,8 +36,14 @@ export default () => {
           </select>
         </label>
         {/* <input type="submit" value="Enviar" /> */}
-        <button type="submit">{loading ? 'Enviando...' : 'Enviar'}</button>
+        <button type="submit">{loading ? 'Enviando...' : 'Submit'}</button>
       </form>
+      <div>
+        <label>
+          Start Kafka consumer: 
+        <button onClick={handleSubmit(startConsumer)} type="button">Start consumer</button>
+        </label>
+      </div>
     </div>
   );
 };
