@@ -16,7 +16,7 @@ hdfs dfs -chmod g+w /tmp
 hdfs dfs -chmod g+w /user/hive/warehouse
 hdfs dfs -mkdir /raw-data
 hdfs dfs -chmod g+w /raw-data
-hdfs dfs -put /config/sample_schema.json /raw-data/sample_schema.json
+hdfs dfs -put /raw-data/sample_schema.json /raw-data/sample_schema.json
 
 $HIVE_HOME/bin/schematool -initSchema -dbType derby
 
@@ -28,6 +28,6 @@ create-topic.sh
 
 ln -s /app ~/app
 cd ~/app
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 cd ..
 tail -f /dev/null
