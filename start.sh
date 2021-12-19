@@ -20,6 +20,8 @@ hdfs dfs -put /raw-data/sample_schema.json /raw-data/sample_schema.json
 
 $HIVE_HOME/bin/schematool -initSchema -dbType derby
 
+hive -f /scripts/sql/finance_ddl.sql
+
 nohup start-zookeeper.sh > /logs/start-zookeeper.log &
 sleep 20
 nohup start-kafka.sh > /logs/start-kafka.log &

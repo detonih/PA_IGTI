@@ -2,6 +2,7 @@
 import React from 'react';
 import useForm from './hooks/useForm';
 import api from './services/api'
+import './App.css'
 
 export default () => {
   const [{ values, loading }, handleChange, handleSubmit] = useForm();
@@ -25,24 +26,29 @@ export default () => {
   };
 
   return (
-    <div>
+    <div className='form-box'>
       <h1>Market</h1>
       <form onSubmit={handleSubmit(getInfo)}>
         <label>
-          Choose your company:
-          <select onChange={handleChange}>
-            <option value="GOOGL" name="GOOGL">GOOGL</option>
-            <option value="MSFT" name="MSFT">MSFT</option>
+          Choose your company ticker:
+          <select className="custom-select" onChange={handleChange}>
+            <option value="GOOGL" name="GOOGL">GOOGL (Google)</option>
+            <option value="MSFT" name="MSFT">MSFT (Microsoft)</option>
+            <option value="AMZN" name="AMZN">AMZN (Amazon)</option>
           </select>
         </label>
         {/* <input type="submit" value="Enviar" /> */}
-        <button type="submit">{loading ? 'Enviando...' : 'Submit'}</button>
+        <div>
+        <button className='submitBut' type="submit">{loading ? 'Enviando...' : 'Submit'}</button>
+        </div>
       </form>
       <div>
         <label>
           Start Kafka consumer: 
-        <button onClick={handleSubmit(startConsumer)} type="button">Start consumer</button>
         </label>
+        <div>
+        <button className='submitBut' onClick={handleSubmit(startConsumer)} type="button">Start consumer</button>
+        </div>
       </div>
     </div>
   );
