@@ -192,4 +192,4 @@ queryStream =(
     .partitionBy("change_date")
     .start())
 
-queryStream.awaitTermination(20)
+queryStream.awaitTermination(10)

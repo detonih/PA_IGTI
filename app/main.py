@@ -5,7 +5,6 @@ import subprocess
 from models.query import Query
 from models.partition import Partition
 from utilities.add_partitions import *
-from utilities.queries import execute_query
 
 app = FastAPI()
 
@@ -46,13 +45,11 @@ def start_consumer():
 @app.post("/add_partition")
 def add_partition(partition: Partition):
   try:
-    right_now = datetime.now().strftime("%Y-%m-%d")
-
     db, table = partition.db, partition.table
-    command = f'hive -e "ALTER TABLE {db}.{table} ADD IF NOT EXISTS PARTITION(change_date=\'{right_now}\') LOCATION \'hdfs://localhost:9000/raw-data/finance-changes/change_date={right_now}\';"'
-
-    result = add_partition_hive(command)
-    return result
+    print("===>", db, table)
+    right_now = datetime.now().strftime("%Y-%m-%d")
+    subprocess.call(["bash", "../scripts/sh/add_partition.sh", f"{db}", f"{table}", f"{right_now}"])
+    return {"status": "OK"}
   except Exception as e:
     print(e)
     print(Exception.with_traceback)
